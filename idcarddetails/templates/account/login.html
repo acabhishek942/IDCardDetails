@@ -1,0 +1,120 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load account %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block content %}
+<head>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src = "{% static 'javascript/idcarddetails/loginandsignup.js' %}"></script>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/loginandsignup.css' %}" />
+
+</head>
+  
+{% if socialaccount.providers  %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+  for a {{site_name}} account and sign in below:{% endblocktrans %}
+</p>
+<div class="socialaccount_ballot">
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+  <div class="login-or">{% trans 'or' %}</div>
+</div>
+{% include "socialaccount/snippets/login_extra.html" %}
+{% else %}
+<div class="container">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <div class="panel panel-login">
+            <div class="panel-heading">
+               <div class="row">
+                  <div class="col-xs-6">
+                     <a href="#" class="active" id="login-form-link">Login</a>
+                  </div>
+                  <div class="col-xs-6">
+                     <a href="#" id="register-form-link">Register</a>
+                  </div>
+               </div>
+               <hr>
+            </div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <form id="login-form" class="login" method="POST" action="{% url 'account_login' %}" style="display: block;">
+                        {% csrf_token %}
+                        {% for error in form.non_field_errors %}
+                        <div class="form-group has-errors text-danger small">
+                           {{error}}
+                        </div>
+                        {% endfor %}
+                        {% for field in form %}
+                        <div class="form-group has-errors text-danger small">
+                           {{field.errors}}
+                        </div>
+                        <div class="form-group has-errors text-danger small">
+                        </div>
+                        <div class="form-group text-center">
+                           {%if field|field_type == "booleanfield" %}
+                           <div class="text-center" tabindex="3">
+                              {{field}}
+                              <label for="remember"> Remember Me</label>
+                           </div>
+                           {% else %}
+                           {{field|add_class:"form-control"}}
+                           {% endif %}
+                        </div>
+                        {% endfor %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <br>
+                        <button class="primaryAction btn btn-primary form-control btn-login" type="submit">{% trans "Sign In" %}</button>
+                        <div class="form-group">
+                           <div class="row">
+                              <div class="col-lg-12">
+                                 <div class="text-center">
+                                    <a class="button secondaryAction forgot-password" tabindex="5" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     <form id="register-form" class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" style="display: none;">
+                        {% csrf_token %}
+                        {% for error in signupform.non_field_errors %}
+                        <div class="form-group has-errors text-danger small">
+                           {{error}}
+                        </div>
+                        {% endfor %}
+                        {% for field in signupform %}
+                        <div class="form-group has-errors text-danger small">
+                           {{field.errors}}
+                        </div>
+                        <div class="form-group has-errors text-danger small">
+                        </div>
+                        <div class="form-group text-center">
+                           {{field|add_class:"form-control"}}
+                        </div>
+                        {% endfor %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button type="submit" class="primaryAction btn btn-primary form-control btn-login" >{% trans "Sign Up" %} &raquo;</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+{% endif %}
+{% endblock %}
