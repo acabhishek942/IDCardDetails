@@ -7,9 +7,11 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src = "{% static 'javascript/idcarddetails/navbar.js' %}"></script>
+    <script type="text/javascript" src = "{% static 'javascript/idcarddetails/jquery.growl.js' %}"></script>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/navbar.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/jquery.growl.css' %}">
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
@@ -19,12 +21,11 @@
 
     {% if messages %}
     <div>
-      <strong>Messages:</strong>
-      <ul>
-	{% for message in messages %}
-	<li>{{message}}</li>
+    {% for message in messages %}
+      <script type="text/javascript">
+        $.growl.notice({message: "{{ message }}"});
+      </script>
 	{% endfor %}
-      </ul>
     </div>
     {% endif %}
 
@@ -45,16 +46,10 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         {% if user.is_authenticated %}
-                        <li class="active"><a href="#" class="">My Profile</a></li>
+                        <li><a href="#" class="">My Profile</a></li>
                         {% else %}
-                        <li class="active"><a href="{% url 'loginandsignup' %}">Sign In</a></li>
+                        <li><a href="{% url 'loginandsignup' %}">Sign In</a></li>
                         {% endif %}
-                        <li class=" down"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HR <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Change Time Entry</a></li>
-                                <li><a href="#">Report</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                       {% if user.is_authenticated %}
