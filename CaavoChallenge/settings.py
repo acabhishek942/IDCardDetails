@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'idcarddetails.apps.IdcarddetailsConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'widget_tweaks',
-    'idcarddetails.apps.IdcarddetailsConfig'
 ]
 
 SITE_ID = 2
