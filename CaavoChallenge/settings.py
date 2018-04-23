@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'idcarddetails',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'widget_tweaks',
+    'idcarddetails.apps.IdcarddetailsConfig'
 ]
 
 SITE_ID = 2
@@ -137,6 +137,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+MEDIA_URL = '/IDCardPhotos/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'IDCardPhotos')
 
 LOGIN_REDIRECT_URL = '/idcarddetails/profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/idcarddetails/login'
