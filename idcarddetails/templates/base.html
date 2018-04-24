@@ -4,14 +4,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src = "{% static 'javascript/idcarddetails/navbar.js' %}"></script>
     <script type="text/javascript" src = "{% static 'javascript/idcarddetails/jquery.growl.js' %}"></script>
+    <script type="text/javascript" src = "{% static 'javascript/idcarddetails/sidebar.js' %}"></script>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/navbar.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/jquery.growl.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/sidebar.css' %}">
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
@@ -29,7 +33,14 @@
     </div>
     {% endif %}
 
-    
+<div id="mySidenav" class="sidenav">
+  <a href="#">Aadhar</a>
+  <a href="#">Driving License</a>
+  <a href="#">Voter Card</a>
+  <a href="#">Ration Card</a>
+  <a href="#">Passport</a>
+</div>
+  
 <div class="navbar-wrapper">
     <div class="container-fluid">
         <nav class="navbar navbar-fixed-top">
@@ -41,11 +52,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Gramin Logo</a>
+                    
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         {% if user.is_authenticated %}
+                        <li><span style="font-size:30px;cursor:pointer" onclick="toggleSideBar()">&#9776; </span></li>
                         <li><a href="{% url 'idcarddetailsProfile' %}" class="">My Profile</a></li>
                         {% else %}
                         <li><a href="{% url 'loginandsignup' %}">Sign In</a></li>
@@ -60,6 +72,7 @@
                             </ul>
                         </li>
                         <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+
                         {% endif %}
                     </ul>
                 </div>
@@ -67,6 +80,7 @@
         </nav>
     </div>
 </div>
+
 
     {% block content %}
     {% endblock %}
