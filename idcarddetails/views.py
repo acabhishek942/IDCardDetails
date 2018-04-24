@@ -3,6 +3,7 @@ from django.template import loader
 
 from allauth.account.views import LoginView
 from allauth.account.forms import SignupForm, LoginForm
+from .forms import IDCardNumbersForm
 
 
 def index(request):
@@ -16,4 +17,5 @@ class LoginAndSignUpView(LoginView):
 
 def profile(request):
 	template = loader.get_template('idcarddetails/profile.html')
-	return HttpResponse(template.render({}, request))
+	context = {'idCardDetailsForm' : IDCardNumbersForm}
+	return HttpResponse(template.render(context, request))
