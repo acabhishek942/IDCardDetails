@@ -4,6 +4,10 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/profile.css' %}" />
+</head>
+{% if detailsExist is defined %}
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -47,4 +51,31 @@
         </div>
     </div>
 </div>
+{% else %}
+{% for field in cardsDetails %}
+<div class="container-fluid">
+    <div class="row text-center">
+        <h2 class="headermessage">Responsive Image Tiles</h3>
+    </div>
+    <div class="row">
+        <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city1.jpg) no-repeat center top;background-size:cover;">
+            <p> {{ field.aadharNumber }} </p>
+        </div>
+        <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city2.jpg) no-repeat center top;background-size:cover;">
+            <p> {{ field.drivingLicenseNumber }} </p>
+        </div>
+        <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city3.jpg) no-repeat center top;background-size:cover;">
+            <p> {{ field.voterCardNumber }} </p>
+        </div>
+        <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city4.jpg) no-repeat center top;background-size:cover;">
+            <p> {{ field.rationCardNumber }} </p>
+        </div>
+        <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city5.jpg) no-repeat center top;background-size:cover;">
+            <p> {{ field.passportNumber }} </p>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
 {% endblock %}
