@@ -6,10 +6,6 @@ from allauth.account.forms import SignupForm, LoginForm
 from .forms import IDCardNumbersForm
 from .models import IDCardNumbers
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the idcarddetails index.")
-
 class LoginAndSignUpView(LoginView):
 	def get_context_data(self, **kwargs):
 	    context = super(LoginAndSignUpView, self).get_context_data(**kwargs)

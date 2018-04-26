@@ -16,3 +16,7 @@ $(function() {
 	});
 
 });
+
+window.onload = function focusUserName() {
+	document.getElementById('id_login').focus();
+}
