@@ -32,3 +32,18 @@ def profile(request):
 	else:
 		context = {'idCardDetailsForm' : IDCardNumbersForm}
 		return HttpResponse(template.render(context, request))
+
+def aadhar(request):
+	pass
+
+def drivingLicense(requets):
+	pass
+
+def voter(request):
+	pass
+
+def ration(request):
+	pass
+
+def passport(request):
+	pass

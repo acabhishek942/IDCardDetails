@@ -34,11 +34,11 @@
     {% endif %}
 
 <div id="mySidenav" class="sidenav">
-  <a href="#">Aadhar</a>
-  <a href="#">Driving License</a>
-  <a href="#">Voter Card</a>
-  <a href="#">Ration Card</a>
-  <a href="#">Passport</a>
+  <a href="{% url 'aadharDetails' %}">Aadhar</a>
+  <a href="{% url 'drivingLicenseDetails' %}">Driving License</a>
+  <a href="{% url 'voterDetails' %}">Voter Card</a>
+  <a href="{% url 'rationCardDetails' %}">Ration Card</a>
+  <a href="{% url 'passportDetails' %}">Passport</a>
 </div>
   
 <div class="navbar-wrapper">
