@@ -3,7 +3,7 @@ from django.template import loader
 
 from allauth.account.views import LoginView
 from allauth.account.forms import SignupForm, LoginForm
-from .forms import IDCardNumbersForm
+from .forms import IDCardNumbersForm, AadharForm
 from .models import IDCardNumbers
 
 class LoginAndSignUpView(LoginView):
@@ -34,7 +34,9 @@ def profile(request):
 		return HttpResponse(template.render(context, request))
 
 def aadhar(request):
-	pass
+	template = loader.get_template('idcarddetails/aadhar.html')
+	context = {'aadharForm' : AadharForm}
+	return HttpResponse(template.render(context, request))
 
 def drivingLicense(requets):
 	pass
