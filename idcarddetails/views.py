@@ -4,7 +4,7 @@ from django.template import loader
 from allauth.account.views import LoginView
 from allauth.account.forms import SignupForm, LoginForm
 from .forms import IDCardNumbersForm, AadharForm
-from .models import IDCardNumbers
+from .models import IDCardNumbers, AadharCardPhotos
 
 class LoginAndSignUpView(LoginView):
 	def get_context_data(self, **kwargs):
@@ -35,8 +35,17 @@ def profile(request):
 
 def aadhar(request):
 	template = loader.get_template('idcarddetails/aadhar.html')
-	context = {'aadharForm' : AadharForm}
-	return HttpResponse(template.render(context, request))
+	print (request.FILES.keys())
+
+	if (request.method == 'POST' and request.FILES.get('aadharPhoto', False)):
+		aadharForm = AadharForm(request.POST, request.FILES)
+		if aadharForm.is_valid():
+			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
+			aadharPhoto.save()
+			return HttpResponse(template.render({}, request))
+	else:
+		context = {'aadharForm' : AadharForm}
+		return HttpResponse(template.render(context, request))
 
 def drivingLicense(requets):
 	pass

@@ -6,23 +6,23 @@ from django.contrib.auth.models import User
 
 def user_aadhar_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/aadhar/<filename>
-    return 'user_{0}/aadhar/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/aadhar/{1}'.format(instance.username.id, filename)
 
 def user_drivingLicense_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/license/<filename>
-    return 'user_{0}/license/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/license/{1}'.format(instance.username.id, filename)
 
 def user_voterCard_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/voter/<filename>
-    return 'user_{0}/voter/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/voter/{1}'.format(instance.username.id, filename)
 
 def user_rationCard_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/ration/<filename>
-    return 'user_{0}/ration/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/ration/{1}'.format(instance.username.id, filename)
 
 def user_passport_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/passport/<filename>
-    return 'user_{0}/passport/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/passport/{1}'.format(instance.username.id, filename)
 
 class IDCardNumbers(models.Model):
 	username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
