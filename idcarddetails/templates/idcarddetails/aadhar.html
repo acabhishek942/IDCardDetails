@@ -49,4 +49,9 @@
     </div>
 </div>
 
+{% for i in aadharPhotos %}
+	<p>{{ i.aadharPhoto.url }}</p>
+    <img src="{{ i.aadharPhoto.url }}" width="500px"/>
+{% endfor %}
+
 {% endblock %}

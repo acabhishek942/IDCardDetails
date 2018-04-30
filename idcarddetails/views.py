@@ -35,7 +35,6 @@ def profile(request):
 
 def aadhar(request):
 	template = loader.get_template('idcarddetails/aadhar.html')
-	print (request.FILES.keys())
 
 	if (request.method == 'POST' and request.FILES.get('aadharPhoto', False)):
 		aadharForm = AadharForm(request.POST, request.FILES)
@@ -43,9 +42,11 @@ def aadhar(request):
 			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
 			aadharPhoto.save()
 			return HttpResponse(template.render({}, request))
-	else:
-		context = {'aadharForm' : AadharForm}
-		return HttpResponse(template.render(context, request))
+	aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
+	if aadharPhotos.exists():
+		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos}, request))
+	context = {'aadharForm' : AadharForm}
+	return HttpResponse(template.render(context, request))
 
 def drivingLicense(requets):
 	pass
