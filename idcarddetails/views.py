@@ -3,8 +3,8 @@ from django.template import loader
 
 from allauth.account.views import LoginView
 from allauth.account.forms import SignupForm, LoginForm
-from .forms import IDCardNumbersForm, AadharForm
-from .models import IDCardNumbers, AadharCardPhotos
+from .forms import IDCardNumbersForm, AadharForm, DrivingLicenseForm, VoterCardForm, RartionCardForm, PassPortForm
+from .models import IDCardNumbers, AadharCardPhotos, DrivingLicensePhotos, VoterCardPhotos, RationCardPhotos, PassportPhotos
 
 class LoginAndSignUpView(LoginView):
 	def get_context_data(self, **kwargs):
@@ -55,13 +55,64 @@ def aadhar(request):
 	return HttpResponse(template.render(context, request))
 
 def drivingLicense(requets):
-	pass
+	template = loader.get_template('idcarddetails/drivingLicense.html')
+
+	if (request.method == 'POST' and request.FILES.get('drivingLicensePhoto', False)):
+		drivingLicenseForm  = DrivingLicenseForm(request.POST, request.FILES)
+		if drivingLicenseForm.is_valid():
+			drivingLicensePhoto = DrivingLicensePhotos(username=request.user, drivingLicensePhoto=request.FILES.get('drivingLicensePhoto', False))
+			drivingLicensePhoto.save()
+			return HttpResponse(template.render({'detailsExist' : True}, request))
+	drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
+	if drivingLicensePhotos.exists():
+		return HttpResponse(template.render({'drivingLicensePhotos' : drivingLicensePhotos, 'detailsExist' : True}, request))
+	context = {'drivingLicenseForm'  : DrivingLicenseForm}
+	return HttpResponse(template.render(context, request))
 
 def voter(request):
-	pass
+	template = loader.get_template('idcarddetails/voterCard.html')
+
+	if (request.method == 'POST' and request.FILES.get('voterCardPhoto', False)):
+		voterCardForm = VoterCardForm(request.POST, request.FILES)
+
+		if voterCardForm.is_valid():
+			voterCardPhoto = VoterCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('voterCardPhoto', False))
+			voterCardPhoto.save()
+			return HttpResponse(template.render({'detailsExist' : True}, request))
+	voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
+	if voterCardPhotos.exists():
+		return HttpResponse(template.render({'voterCardPhotos' : voterCardPhotos, 'detailsExist' : True}, request))
+	context = {'voterCardForm' : VoterCardForm}
+	return HttpResponse(template.render(context, request))
 
 def ration(request):
-	pass
+	template = loader.get_template('idcarddetails/rationCard.html')
+
+	if (request.method == 'POST' and request.FILES.get('rationCardPhoto', False)):
+		rationCardForm = RartionCardForm(request.POST, request.FILES)
+
+		if rationCardForm.is_valid():
+			rationCardPhoto = RationCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('rationCardPhoto', False))
+			rationCardPhoto.save()
+			return HttpResponse(template.render({'detailsExist' : True}, request))
+	rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
+	if rationCardPhotos.exists():
+		return HttpResponse(template.render({'rationCardPhotos' : rationCardPhotos, 'detailsExist' : True}, request))
+	context = {'rationCardForm' : RartionCardForm}
+	return HttpResponse(template.render(context, request))
 
 def passport(request):
-	pass
+	template = loader.get_template('idcarddetails/passPort.html')
+
+	if (request.method == 'POST' and request.FILES.get('passportPhoto', False)):
+		passportForm = PassPortForm(request.POST, request.FILES)
+
+		if passportForm.is_valid():
+			passportPhoto = PassportPhotos(username=request.user, voterCardPhoto=request.FILES.get('rationCardPhoto', False))
+			passportPhoto.save()
+			return HttpResponse(template.render({'detailsExist' : True}, request))
+	passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
+	if passportPhotos.exists():
+		return HttpResponse(template.render({'passportPhotos' : passportPhotos, 'detailsExist' : True}, request))
+	context = {'passportForm' : PassPortForm}
+	return HttpResponse(template.render(context, request))
