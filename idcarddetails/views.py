@@ -14,6 +14,9 @@ class LoginAndSignUpView(LoginView):
 
 def profile(request):
 	template = loader.get_template('idcarddetails/profile.html')
+
+	# when request.method is 'POST' we need to perform validations
+	# and save the data in DB.
 	if request.method == 'POST':
 		idcardForm = IDCardNumbersForm(request.POST)
 		if idcardForm.is_valid():
@@ -26,6 +29,9 @@ def profile(request):
 				voterCardNumber, rationCardNumber, passportNumber)
 			userCardsDetails.save()
 			return HttpResponse(template.render({'cardsDetails' : [userCardsDetails], 'detailsExist' : True}, request))
+
+	# Search for the details in DB if already existing we pass the
+	# 'detilsExist' flat to not render the form part of the template
 	userCardDetails = IDCardNumbers.objects.filter(username=request.user.id)
 	if userCardDetails.exists():
 		return HttpResponse(template.render({'cardsDetails' : userCardDetails, 'detailsExist' : True}, request))
@@ -41,10 +47,10 @@ def aadhar(request):
 		if aadharForm.is_valid():
 			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
 			aadharPhoto.save()
-			return HttpResponse(template.render({}, request))
+			return HttpResponse(template.render({'detailsExist' : True}, request))
 	aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
 	if aadharPhotos.exists():
-		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos}, request))
+		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos, 'detailsExist' : True}, request))
 	context = {'aadharForm' : AadharForm}
 	return HttpResponse(template.render(context, request))
 

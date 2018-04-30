@@ -4,7 +4,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
-
+{% if detailsExist is defined %}
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -48,10 +48,9 @@
         </div>
     </div>
 </div>
-
+{% else %}
 {% for i in aadharPhotos %}
-	<p>{{ i.aadharPhoto.url }}</p>
     <img src="{{ i.aadharPhoto.url }}" width="500px"/>
 {% endfor %}
-
+{% endif %}
 {% endblock %}
