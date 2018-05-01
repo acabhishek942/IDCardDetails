@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = '3+_5fnd)y3p7@0+6&wiom)=bl%0=2d6d1efgx()9%da#usx*71'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['caavohiringchallenge.herokuapp.com',]
 
 
 # Application definition
@@ -94,6 +94,11 @@ DATABASES = {
         'PASSWORD': 'mysqladminpassword'
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Password validation
