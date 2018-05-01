@@ -47,14 +47,14 @@ def aadhar(request):
 		if aadharForm.is_valid():
 			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
 			aadharPhoto.save()
-			return HttpResponse(template.render({'detailsExist' : True}, request))
+			return HttpResponse(template.render({'detailsExist' : True, 'aadharPhotos' : [aadharPhoto,]}, request))
 	aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
 	if aadharPhotos.exists():
 		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos, 'detailsExist' : True}, request))
 	context = {'aadharForm' : AadharForm}
 	return HttpResponse(template.render(context, request))
 
-def drivingLicense(requets):
+def drivingLicense(request):
 	template = loader.get_template('idcarddetails/drivingLicense.html')
 
 	if (request.method == 'POST' and request.FILES.get('drivingLicensePhoto', False)):
@@ -62,7 +62,7 @@ def drivingLicense(requets):
 		if drivingLicenseForm.is_valid():
 			drivingLicensePhoto = DrivingLicensePhotos(username=request.user, drivingLicensePhoto=request.FILES.get('drivingLicensePhoto', False))
 			drivingLicensePhoto.save()
-			return HttpResponse(template.render({'detailsExist' : True}, request))
+			return HttpResponse(template.render({'detailsExist' : True, 'drivingLicensePhotos' : [drivingLicensePhoto,]}, request))
 	drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
 	if drivingLicensePhotos.exists():
 		return HttpResponse(template.render({'drivingLicensePhotos' : drivingLicensePhotos, 'detailsExist' : True}, request))
@@ -78,7 +78,7 @@ def voter(request):
 		if voterCardForm.is_valid():
 			voterCardPhoto = VoterCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('voterCardPhoto', False))
 			voterCardPhoto.save()
-			return HttpResponse(template.render({'detailsExist' : True}, request))
+			return HttpResponse(template.render({'detailsExist' : True, 'voterCardPhotos' : [voterCardPhoto,]}, request))
 	voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
 	if voterCardPhotos.exists():
 		return HttpResponse(template.render({'voterCardPhotos' : voterCardPhotos, 'detailsExist' : True}, request))
@@ -92,9 +92,9 @@ def ration(request):
 		rationCardForm = RartionCardForm(request.POST, request.FILES)
 
 		if rationCardForm.is_valid():
-			rationCardPhoto = RationCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('rationCardPhoto', False))
+			rationCardPhoto = RationCardPhotos(username=request.user, rationCardPhoto=request.FILES.get('rationCardPhoto', False))
 			rationCardPhoto.save()
-			return HttpResponse(template.render({'detailsExist' : True}, request))
+			return HttpResponse(template.render({'detailsExist' : True, 'rationCardPhotos' : [rationCardPhoto,]}, request))
 	rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
 	if rationCardPhotos.exists():
 		return HttpResponse(template.render({'rationCardPhotos' : rationCardPhotos, 'detailsExist' : True}, request))
@@ -108,9 +108,9 @@ def passport(request):
 		passportForm = PassPortForm(request.POST, request.FILES)
 
 		if passportForm.is_valid():
-			passportPhoto = PassportPhotos(username=request.user, voterCardPhoto=request.FILES.get('rationCardPhoto', False))
+			passportPhoto = PassportPhotos(username=request.user, passportPhoto=request.FILES.get('passportPhoto', False))
 			passportPhoto.save()
-			return HttpResponse(template.render({'detailsExist' : True}, request))
+			return HttpResponse(template.render({'detailsExist' : True, 'passportPhotos' : [passportPhoto,]}, request))
 	passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
 	if passportPhotos.exists():
 		return HttpResponse(template.render({'passportPhotos' : passportPhotos, 'detailsExist' : True}, request))

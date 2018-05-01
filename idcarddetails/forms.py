@@ -33,6 +33,7 @@ class DrivingLicenseForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(DrivingLicenseForm, self).__init__(*args, **kwargs)
 		for field_name in self.fields:
+			field = self.fields.get(field_name)
 			if field:
 				if type(field.widget) in (forms.TextInput, forms.DateInput):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
@@ -46,6 +47,7 @@ class VoterCardForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(VoterCardForm, self).__init__(*args, **kwargs)
 		for field_name in self.fields:
+			field = self.fields.get(field_name)
 			if field:
 				if type(field.widget) in (forms.TextInput, forms.DateInput):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
@@ -59,6 +61,7 @@ class RartionCardForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(RartionCardForm, self).__init__(*args, **kwargs)
 		for field_name in self.fields:
+			field = self.fields.get(field_name)
 			if field:
 				if type(field.widget) in (forms.TextInput, forms.DateInput):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
@@ -71,6 +74,7 @@ class PassPortForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(PassPortForm, self).__init__(*args, **kwargs)
 		for field_name in self.fields:
+			field = self.fields.get(field_name)
 			if field:
 				if type(field.widget) in (forms.TextInput, forms.DateInput):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
