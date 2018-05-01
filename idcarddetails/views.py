@@ -47,7 +47,8 @@ def aadhar(request):
 		if aadharForm.is_valid():
 			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
 			aadharPhoto.save()
-			return HttpResponse(template.render({'aadharForm' : AadharForm, 'aadharPhotos' : [aadharPhoto,]}, request))
+			aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
+			return HttpResponse(template.render({'aadharForm' : AadharForm, 'aadharPhotos' : aadharPhotos}, request))
 	aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
 	if aadharPhotos.exists():
 		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos, 'aadharForm' : AadharForm}, request))
@@ -62,7 +63,8 @@ def drivingLicense(request):
 		if drivingLicenseForm.is_valid():
 			drivingLicensePhoto = DrivingLicensePhotos(username=request.user, drivingLicensePhoto=request.FILES.get('drivingLicensePhoto', False))
 			drivingLicensePhoto.save()
-			return HttpResponse(template.render({'drivingLicenseForm'  : DrivingLicenseForm, 'drivingLicensePhotos' : [drivingLicensePhoto,]}, request))
+			drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
+			return HttpResponse(template.render({'drivingLicenseForm'  : DrivingLicenseForm, 'drivingLicensePhotos' : drivingLicensePhotos}, request))
 	drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
 	if drivingLicensePhotos.exists():
 		return HttpResponse(template.render({'drivingLicensePhotos' : drivingLicensePhotos, 'drivingLicenseForm'  : DrivingLicenseForm}, request))
@@ -78,7 +80,8 @@ def voter(request):
 		if voterCardForm.is_valid():
 			voterCardPhoto = VoterCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('voterCardPhoto', False))
 			voterCardPhoto.save()
-			return HttpResponse(template.render({'voterCardForm' : VoterCardForm, 'voterCardPhotos' : [voterCardPhoto,]}, request))
+			voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
+			return HttpResponse(template.render({'voterCardForm' : VoterCardForm, 'voterCardPhotos' : voterCardPhotos}, request))
 	voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
 	if voterCardPhotos.exists():
 		return HttpResponse(template.render({'voterCardPhotos' : voterCardPhotos, 'voterCardForm' : VoterCardForm}, request))
@@ -94,7 +97,8 @@ def ration(request):
 		if rationCardForm.is_valid():
 			rationCardPhoto = RationCardPhotos(username=request.user, rationCardPhoto=request.FILES.get('rationCardPhoto', False))
 			rationCardPhoto.save()
-			return HttpResponse(template.render({'rationCardForm' : RartionCardForm, 'rationCardPhotos' : [rationCardPhoto,]}, request))
+			rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
+			return HttpResponse(template.render({'rationCardForm' : RartionCardForm, 'rationCardPhotos' : rationCardPhotos}, request))
 	rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
 	if rationCardPhotos.exists():
 		return HttpResponse(template.render({'rationCardPhotos' : rationCardPhotos, 'rationCardForm' : RartionCardForm}, request))
@@ -110,7 +114,8 @@ def passport(request):
 		if passportForm.is_valid():
 			passportPhoto = PassportPhotos(username=request.user, passportPhoto=request.FILES.get('passportPhoto', False))
 			passportPhoto.save()
-			return HttpResponse(template.render({'passportForm' : PassPortForm, 'passportPhotos' : [passportPhoto,]}, request))
+			passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
+			return HttpResponse(template.render({'passportForm' : PassPortForm, 'passportPhotos' : passportPhotos}, request))
 	passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
 	if passportPhotos.exists():
 		return HttpResponse(template.render({'passportPhotos' : passportPhotos, 'passportForm' : PassPortForm}, request))
