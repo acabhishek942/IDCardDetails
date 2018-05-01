@@ -7,15 +7,12 @@
 <head>
     <script type="text/javascript" src="{% static 'javascript/idcarddetails/imageform.js' %}"></script>
 </head>
-
 {% for i in drivingLicensePhotos %}
-    <img src="{{ i.drivingLicensePhoto.url }}" width="500px"/>
+<img src="{{ i.drivingLicensePhoto.url }}" width="500px"/>
 {% endfor %}
-
 <div class="col-md-6 col-md-offset-3">
-<button id='imageFormToggleButton' onclick="toggleImageAdditionForm()" type="submit" class="primaryAction btn btn-primary form-control btn-login" >{% trans "Add More Image" %} &raquo;</button>
+    <button id='imageFormToggleButton' onclick="toggleImageAdditionForm()" type="submit" class="primaryAction btn btn-primary form-control btn-login" >{% trans "Add More Image" %} &raquo;</button>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -50,5 +47,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

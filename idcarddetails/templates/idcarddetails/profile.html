@@ -5,7 +5,7 @@
 {% load widget_tweaks %}
 {% block content %}
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/profile.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/profile.css' %}" />
 </head>
 {% if detailsExist is defined %}
 <div class="container">
@@ -55,7 +55,8 @@
 {% for field in cardsDetails %}
 <div class="container-fluid">
     <div class="row text-center">
-        <h2 class="headermessage">Responsive Image Tiles</h3>
+        <h2 class="headermessage">
+        Responsive Image Tiles</h3>
     </div>
     <div class="row">
         <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city1.jpg) no-repeat center top;background-size:cover;">
@@ -75,7 +76,6 @@
         </div>
     </div>
 </div>
-
 {% endfor %}
 {% endif %}
 {% endblock %}
