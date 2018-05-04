@@ -147,6 +147,8 @@ LOGIN_REDIRECT_URL = '/idcarddetails/profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/idcarddetails/login'
 ACCOUNT_LOGOUT_ON_GET= True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 CORS_REPLACE_HTTPS_REFERER      = False
 HOST_SCHEME                     = "http://"
 SECURE_PROXY_SSL_HEADER         = None

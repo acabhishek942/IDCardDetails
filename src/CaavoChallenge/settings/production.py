@@ -151,6 +151,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/IDCardPhotos/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'IDCardPhotos')
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 LOGIN_REDIRECT_URL = '/idcarddetails/profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/idcarddetails/login'
 ACCOUNT_LOGOUT_ON_GET= True

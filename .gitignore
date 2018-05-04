@@ -105,3 +105,9 @@ venv.bak/
 
 # DB Files
 IDCardPhotos/*
+
+#aws directory
+src/CaaVoChallenge/aws/*
+
+#static directory for Heroku
+src/static/*
