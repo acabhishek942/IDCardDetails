@@ -104,7 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # DB Files
-IDCardPhotos/*
+src/IDCardPhotos/*
 
 #aws directory
 src/CaaVoChallenge/aws/*
