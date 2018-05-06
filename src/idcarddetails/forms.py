@@ -22,7 +22,7 @@ class AadharForm(forms.ModelForm):
 		for field_name in self.fields:
 			field = self.fields.get(field_name)
 			if field:
-				if type(field.widget) in (forms.TextInput, forms.DateInput):
+				if type(field.widget) in (forms.FileInput,):
 					field.widget = forms.TextInput(attrs={'placeholder' : field.label})
 
 	class Meta:
@@ -35,7 +35,7 @@ class DrivingLicenseForm(forms.ModelForm):
 		for field_name in self.fields:
 			field = self.fields.get(field_name)
 			if field:
-				if type(field.widget) in (forms.TextInput, forms.DateInput):
+				if type(field.widget) in (forms.FileInput,):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
 
 	class Meta:
@@ -49,7 +49,7 @@ class VoterCardForm(forms.ModelForm):
 		for field_name in self.fields:
 			field = self.fields.get(field_name)
 			if field:
-				if type(field.widget) in (forms.TextInput, forms.DateInput):
+				if type(field.widget) in (forms.FileInput,):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
 
 	class Meta:
@@ -63,7 +63,7 @@ class RartionCardForm(forms.ModelForm):
 		for field_name in self.fields:
 			field = self.fields.get(field_name)
 			if field:
-				if type(field.widget) in (forms.TextInput, forms.DateInput):
+				if type(field.widget) in (forms.FileInput,):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
 
 	class Meta:
@@ -76,7 +76,7 @@ class PassPortForm(forms.ModelForm):
 		for field_name in self.fields:
 			field = self.fields.get(field_name)
 			if field:
-				if type(field.widget) in (forms.TextInput, forms.DateInput):
+				if type(field.widget) in (forms.FileInput,):
 					filed.widget = form.TextInput(attrs={'placeholder' : field.label})
 
 	class Meta:

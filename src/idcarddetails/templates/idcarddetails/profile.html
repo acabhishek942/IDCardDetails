@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/idcarddetails/profile.css' %}" />
 </head>
 {% if detailsExist is defined %}
-<div class="container">
+<div class="container" style="padding-top:40px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
@@ -53,10 +53,10 @@
 </div>
 {% else %}
 {% for field in cardsDetails %}
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top:35px">
     <div class="row text-center">
         <h2 class="headermessage">
-        Responsive Image Tiles</h3>
+        Hover to see your id card number</h2>
     </div>
     <div class="row">
         <div class="image-block col-sm-4" style="background: url(http://www.prepbootstrap.com/Content/images/template/ResponsiveImageTiles/city1.jpg) no-repeat center top;background-size:cover;">
@@ -78,4 +78,7 @@
 </div>
 {% endfor %}
 {% endif %}
+</div>
+</div>
+
 {% endblock %}

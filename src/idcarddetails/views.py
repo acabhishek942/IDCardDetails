@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.urls import reverse
 
 from allauth.account.views import LoginView
 from allauth.account.forms import SignupForm, LoginForm
@@ -28,7 +29,7 @@ def profile(request):
 			userCardsDetails = IDCardNumbers(request.user.id, aadharNumber, drivingLicenseNumber, 
 				voterCardNumber, rationCardNumber, passportNumber)
 			userCardsDetails.save()
-			return HttpResponse(template.render({'cardsDetails' : [userCardsDetails], 'detailsExist' : True}, request))
+			return HttpResponseRedirect(reverse('idcarddetailsProfile'))
 
 	# Search for the details in DB if already existing we pass the
 	# 'detilsExist' flat to not render the form part of the template
@@ -48,7 +49,7 @@ def aadhar(request):
 			aadharPhoto = AadharCardPhotos(username=request.user, aadharPhoto=request.FILES.get('aadharPhoto', False))
 			aadharPhoto.save()
 			aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
-			return HttpResponse(template.render({'aadharForm' : AadharForm, 'aadharPhotos' : aadharPhotos}, request))
+			return HttpResponseRedirect(reverse('aadharDetails'))
 	aadharPhotos = AadharCardPhotos.objects.filter(username=request.user.id)
 	if aadharPhotos.exists():
 		return HttpResponse(template.render({'aadharPhotos' : aadharPhotos, 'aadharForm' : AadharForm}, request))
@@ -64,7 +65,7 @@ def drivingLicense(request):
 			drivingLicensePhoto = DrivingLicensePhotos(username=request.user, drivingLicensePhoto=request.FILES.get('drivingLicensePhoto', False))
 			drivingLicensePhoto.save()
 			drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
-			return HttpResponse(template.render({'drivingLicenseForm'  : DrivingLicenseForm, 'drivingLicensePhotos' : drivingLicensePhotos}, request))
+			return HttpResponseRedirect('drivingLicenseDetails')
 	drivingLicensePhotos = DrivingLicensePhotos.objects.filter(username=request.user.id)
 	if drivingLicensePhotos.exists():
 		return HttpResponse(template.render({'drivingLicensePhotos' : drivingLicensePhotos, 'drivingLicenseForm'  : DrivingLicenseForm}, request))
@@ -81,7 +82,7 @@ def voter(request):
 			voterCardPhoto = VoterCardPhotos(username=request.user, voterCardPhoto=request.FILES.get('voterCardPhoto', False))
 			voterCardPhoto.save()
 			voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
-			return HttpResponse(template.render({'voterCardForm' : VoterCardForm, 'voterCardPhotos' : voterCardPhotos}, request))
+			return HttpResponseRedirect('voterDetails')
 	voterCardPhotos = VoterCardPhotos.objects.filter(username=request.user.id)
 	if voterCardPhotos.exists():
 		return HttpResponse(template.render({'voterCardPhotos' : voterCardPhotos, 'voterCardForm' : VoterCardForm}, request))
@@ -98,7 +99,7 @@ def ration(request):
 			rationCardPhoto = RationCardPhotos(username=request.user, rationCardPhoto=request.FILES.get('rationCardPhoto', False))
 			rationCardPhoto.save()
 			rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
-			return HttpResponse(template.render({'rationCardForm' : RartionCardForm, 'rationCardPhotos' : rationCardPhotos}, request))
+			return HttpResponseRedirect('rationCardDetails')
 	rationCardPhotos = RationCardPhotos.objects.filter(username=request.user.id)
 	if rationCardPhotos.exists():
 		return HttpResponse(template.render({'rationCardPhotos' : rationCardPhotos, 'rationCardForm' : RartionCardForm}, request))
@@ -115,7 +116,7 @@ def passport(request):
 			passportPhoto = PassportPhotos(username=request.user, passportPhoto=request.FILES.get('passportPhoto', False))
 			passportPhoto.save()
 			passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
-			return HttpResponse(template.render({'passportForm' : PassPortForm, 'passportPhotos' : passportPhotos}, request))
+			return HttpResponseRedirect('passportDetails')
 	passportPhotos = PassportPhotos.objects.filter(username=request.user.id)
 	if passportPhotos.exists():
 		return HttpResponse(template.render({'passportPhotos' : passportPhotos, 'passportForm' : PassPortForm}, request))
